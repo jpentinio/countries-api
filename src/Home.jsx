@@ -71,12 +71,12 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <Input
           placeholder="Search for a country..."
           size="large"
           prefix={<BsSearch className="text-gray-500" />}
-          className={`px-4 w-[400px] ${
+          className={`px-4 sm:w-[400px] ${
             theme === "light"
               ? "bg-white"
               : "bg-dark-blue text-white border-very-dark-blue"
@@ -108,7 +108,7 @@ const Home = () => {
               className={`${
                 theme === "dark" &&
                 "text-white bg-dark-blue border-very-dark-blue"
-              }`}
+              } w-full sm:w-auto`}
               onClick={(e) => e.preventDefault()}
             >
               <Space>
@@ -119,19 +119,44 @@ const Home = () => {
           </Dropdown>
         </Tooltip>
       </div>
-      <div className="py-12 grid grid-cols-4 gap-12">
-        {data.length > 0
-          ? data.map((item, index) => (
-              <Card
-                key={index}
-                flag={item.flags}
-                country={item.name}
-                population={item.population}
-                region={item.region}
-                capital={item.capital}
-              />
-            ))
-          : ""}
+      <div className="py-12 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {loading ? (
+          [...Array(8)].map(() => (
+            <div
+              className={`${
+                theme === "light" ? "bg-white" : "bg-dark-blue"
+              } animate-pulse  flex flex-col rounded-lg shadow-lg cursor-pointer hover:shadow-xl`}
+            >
+              <div className="w-full h-60 rounded-t-lg bg-slate-400" />
+              <div className="p-6 flex flex-col gap-4">
+                <div className="rounded-full bg-slate-400 h-4 w-full"></div>
+                <div className="pt-4">
+                  <div className="rounded-full bg-slate-400 h-4 w-52">
+                    <span className="font-semibold"></span>{" "}
+                  </div>
+                  <div className="my-4 rounded-full bg-slate-400 h-4 w-40">
+                    <span className="font-semibold"></span>{" "}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : data.length > 0 ? (
+          data.map((item, index) => (
+            <Card
+              key={index}
+              flag={item.flags}
+              country={item.name}
+              population={item.population}
+              region={item.region}
+              capital={item.capital}
+            />
+          ))
+        ) : (
+          <div className="p-12 text-center w-full absolute left-0 right-0">
+            No results
+          </div>
+        )}
       </div>
     </div>
   );

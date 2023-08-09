@@ -14,12 +14,12 @@ const Layout = ({ children }) => {
       <div
         className={`${
           theme === "light" ? "bg-white" : "bg-dark-blue border-very-dark-blue"
-        } border-b p-6 shadow-sm`}
+        } border-b p-10 shadow-sm`}
       >
         <div className="container mx-auto flex justify-between items-center">
           <div
             onClick={() => navigate("/")}
-            className="text-xl font-bold cursor-pointer"
+            className="sm:text-xl font-bold cursor-pointer"
           >
             Where in the world?
           </div>
@@ -42,6 +42,25 @@ const Layout = ({ children }) => {
       </div>
       <div className={`p-10 min-h-[100vh]`}>
         <div className="container mx-auto">{children}</div>
+      </div>
+      <div className="px-2 flex flex-row p-2 items-center justify-center">
+        Challenge by{" "}
+        <a
+          href="https://www.frontendmentor.io/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pl-2"
+        >
+          Frontend Mentor
+        </a>
+        . Coded by{" "}
+        <a
+          href="https://www.frontendmentor.io/profile/jpentinio"
+          target="_blank"
+          className="px-2"
+        >
+          Joshua M. Pentinio
+        </a>
       </div>
     </div>
   );
